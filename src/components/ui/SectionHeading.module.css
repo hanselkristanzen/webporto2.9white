@@ -1,0 +1,54 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.index {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  color: var(--color-accent-text);
+}
+
+section[data-dark] .index {
+  color: var(--color-accent-bright);
+}
+
+.rule {
+  flex: 1;
+  height: 1px;
+  background: var(--color-paper-line);
+  max-width: 6rem;
+}
+
+section[data-dark] .rule {
+  background: var(--color-dark-line);
+}
+
+.headline {
+  font-size: var(--fs-4);
+  max-width: 22ch;
+  padding-bottom: 0.15em;
+}
+
+.headline--wide {
+  max-width: 34ch;
+}
+
+.kicker {
+  font-size: var(--fs-1);
+  color: var(--color-ink-soft);
+  max-width: 46ch;
+  font-weight: 400;
+  line-height: var(--lh-relaxed);
+}
+
+section[data-dark] .kicker {
+  color: var(--color-on-dark-soft);
+}

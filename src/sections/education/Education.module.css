@@ -1,0 +1,88 @@
+.education {
+  background: var(--color-paper);
+  padding-block: var(--space-9);
+}
+
+.headerRow {
+  margin-bottom: var(--space-8);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  padding: var(--space-6);
+  border: 1px solid var(--color-paper-line-strong);
+  border-radius: var(--radius-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  transition: border-color var(--dur-normal) var(--ease-out), background-color var(--dur-normal) var(--ease-out);
+}
+
+.card:hover {
+  border-color: var(--color-ink);
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.institution {
+  font-size: var(--fs-3);
+  max-width: 20ch;
+  padding-bottom: 0.08em;
+}
+
+.years {
+  font-family: var(--font-mono);
+  font-size: var(--fs-00);
+  color: var(--color-ink-faint);
+  white-space: nowrap;
+}
+
+.program {
+  font-size: var(--fs-1);
+  color: var(--color-ink-soft);
+}
+
+.focus {
+  margin-top: var(--space-1);
+  font-size: var(--fs-0);
+  color: var(--color-ink-faint);
+}
+
+.footerRow {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-paper-line);
+}
+
+.location {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.distinction {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2);
+  color: var(--color-accent-text);
+}

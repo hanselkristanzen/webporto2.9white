@@ -1,0 +1,161 @@
+/*
+  DESIGN TOKENS
+  Single source of truth for the visual language of the site.
+  Everything downstream (components, sections) reads from these
+  custom properties rather than hard-coding values.
+
+  Theming model: the site's editorial identity is built around *alternating*
+  light ("paper") and dark sections — that alternation is intentional and is
+  preserved regardless of the light/dark toggle (see Contact/Hero/Footer,
+  which use the --color-dark palette directly and are always dark).
+  The light/dark *toggle* instead controls the --color-paper palette: in
+  light mode it's warm off-white (the original design); in dark mode it
+  becomes a near-black surface so the whole page reads as dark, without
+  touching the sections that were already intentionally dark.
+*/
+
+:root {
+  /* ---------------------------------------------------------------- */
+  /* COLOR — warm paper + near-black ink + a single signal-amber accent */
+  /* ---------------------------------------------------------------- */
+  --color-paper: #f6f3ec;
+  --color-paper-dim: #ece6d8;
+  --color-paper-line: rgba(20, 18, 14, 0.13);
+  --color-paper-line-strong: rgba(20, 18, 14, 0.26);
+
+  --color-ink: #14120e;
+  --color-ink-soft: #4a4438;
+  --color-ink-faint: #8a8375;
+
+  --color-dark: #0c0b09;
+  --color-dark-soft: #19170f;
+  --color-dark-line: rgba(246, 243, 236, 0.14);
+  --color-dark-line-strong: rgba(246, 243, 236, 0.26);
+  --color-on-dark: #f6f3ec;
+  --color-on-dark-soft: rgba(246, 243, 236, 0.64);
+  --color-on-dark-faint: rgba(246, 243, 236, 0.4);
+
+  /* signal amber — the one accent, used with intent */
+  --color-accent: #c3861c;
+  --color-accent-text: #8a5a14; /* AA-safe on paper for links/body-scale use */
+  --color-accent-bright: #e8b84b; /* for dark backgrounds / emissive 3D use */
+  --color-accent-dim: rgba(195, 134, 28, 0.16);
+
+  --color-focus-ring: #8a5a14;
+
+  /* ---------------------------------------------------------------- */
+  /* TYPE                                                              */
+  /* ---------------------------------------------------------------- */
+  --font-display: "General Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "General Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "Space Mono", "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --fs-000: clamp(0.6875rem, 0.66rem + 0.13vw, 0.75rem);
+  --fs-00: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --fs-0: clamp(0.9375rem, 0.9rem + 0.19vw, 1rem);
+  --fs-1: clamp(1.0625rem, 1rem + 0.31vw, 1.1875rem);
+  --fs-2: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --fs-3: clamp(1.625rem, 1.45rem + 0.9vw, 2.0625rem);
+  --fs-4: clamp(2.25rem, 1.9rem + 1.8vw, 3.25rem);
+  --fs-5: clamp(3rem, 2.3rem + 3.5vw, 5rem);
+  --fs-6: clamp(3.75rem, 2.5rem + 6.5vw, 8rem);
+
+  /* Tight enough to feel editorial, loose enough that descenders (g, y, j, p)
+     never get clipped by an overflow:hidden reveal wrapper or a fixed-height
+     container — see TASK 4. 1.02 was cutting it close on some font builds. */
+  --lh-tight: 1.12;
+  --lh-snug: 1.2;
+  --lh-normal: 1.5;
+  --lh-relaxed: 1.7;
+
+  --ls-tight: -0.03em;
+  --ls-normal: 0em;
+  --ls-wide: 0.06em;
+  --ls-wider: 0.16em;
+  --ls-widest: 0.28em;
+
+  /* ---------------------------------------------------------------- */
+  /* SPACE — 8px derived scale                                         */
+  /* ---------------------------------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 6.5rem;
+  --space-10: 9rem;
+  --space-11: 13rem;
+
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --container-max: 92rem;
+
+  /* ---------------------------------------------------------------- */
+  /* RADIUS — restrained, mostly hairline / square                     */
+  /* ---------------------------------------------------------------- */
+  --radius-0: 0px;
+  --radius-1: 2px;
+  --radius-2: 4px;
+  --radius-pill: 999px;
+
+  /* ---------------------------------------------------------------- */
+  /* MOTION TOKENS                                                      */
+  /* ---------------------------------------------------------------- */
+  --dur-fast: 150ms;
+  --dur-normal: 300ms;
+  --dur-slow: 600ms;
+  --dur-cinematic: 1100ms;
+  --dur-theme: 550ms;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-signal: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* ---------------------------------------------------------------- */
+  /* ELEVATION / DEPTH — line + shadow used sparingly for real depth   */
+  /* ---------------------------------------------------------------- */
+  --shadow-soft: 0 1px 2px rgba(20, 18, 14, 0.04), 0 12px 32px -16px rgba(20, 18, 14, 0.18);
+  --shadow-lifted: 0 4px 8px rgba(20, 18, 14, 0.05), 0 30px 60px -24px rgba(20, 18, 14, 0.28);
+
+  /* ---------------------------------------------------------------- */
+  /* Z-INDEX SCALE                                                      */
+  /* ---------------------------------------------------------------- */
+  --z-base: 0;
+  --z-canvas: 5;
+  --z-content: 10;
+  --z-nav: 40;
+  --z-cursor: 60;
+  --z-loader: 90;
+  --z-easter-egg: 80;
+  --z-lightbox: 120;
+
+  /* ---------------------------------------------------------------- */
+  /* BREAKPOINTS (referenced in comments — CSS can't read vars in @media)*/
+  /* mobile: <=480px / tablet: <=768px / laptop: <=1024px / desktop: 1280+ */
+}
+
+/*
+  DARK THEME — remaps the "paper" (light) surface palette to a dark one.
+  Sections that are already intentionally dark by design (Hero, Research,
+  Contact, Footer — anything using --color-dark directly) are deliberately
+  left alone here: they were dark before the toggle existed and stay
+  visually consistent with the reference screenshots either way.
+*/
+[data-theme="dark"] {
+  --color-paper: #121110;
+  --color-paper-dim: #1a1812;
+  --color-paper-line: rgba(246, 243, 236, 0.12);
+  --color-paper-line-strong: rgba(246, 243, 236, 0.24);
+
+  --color-ink: #f3efe4;
+  --color-ink-soft: rgba(243, 239, 228, 0.72);
+  --color-ink-faint: rgba(243, 239, 228, 0.46);
+
+  --color-accent-text: #e8b84b;
+  --color-focus-ring: #e8b84b;
+
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px -16px rgba(0, 0, 0, 0.55);
+  --shadow-lifted: 0 4px 8px rgba(0, 0, 0, 0.35), 0 30px 60px -24px rgba(0, 0, 0, 0.6);
+}

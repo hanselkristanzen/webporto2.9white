@@ -1,0 +1,65 @@
+.skills {
+  background: var(--color-paper);
+  padding-block: var(--space-9);
+}
+
+.headerRow {
+  margin-bottom: var(--space-8);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-7);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+}
+
+.groupLabel {
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-paper-line-strong);
+  margin-bottom: var(--space-3);
+}
+
+.skillItem {
+  position: relative;
+  display: block;
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--color-paper-line);
+  font-size: var(--fs-2);
+  color: var(--color-ink-soft);
+  transition: color var(--dur-normal) var(--ease-out), padding-left var(--dur-normal) var(--ease-signal);
+  cursor: default;
+}
+
+.skillItem:hover,
+.skillItem:focus-visible {
+  color: var(--color-ink);
+  padding-left: var(--space-3);
+}
+
+.skillItem:hover .skillMarker,
+.skillItem:focus-visible .skillMarker {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.skillMarker {
+  position: absolute;
+  left: -1.1rem;
+  top: 50%;
+  transform: translate(-4px, -50%);
+  color: var(--color-accent-text);
+  opacity: 0;
+  transition: opacity var(--dur-normal) var(--ease-out), transform var(--dur-normal) var(--ease-out);
+}

@@ -1,0 +1,109 @@
+.contact {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  padding-block: var(--space-11) var(--space-9);
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+}
+
+.auroraLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.eyebrowRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.index {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  color: var(--color-accent-bright);
+}
+
+.headline {
+  font-size: var(--fs-6);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  max-width: 14ch;
+  padding-bottom: 0.08em;
+}
+
+.sub {
+  margin-top: var(--space-6);
+  font-size: var(--fs-2);
+  color: var(--color-on-dark-soft);
+  max-width: 34ch;
+  font-weight: 400;
+}
+
+.ctaRow {
+  margin-top: var(--space-8);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
+.channels {
+  margin-top: var(--space-10);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5) var(--space-7);
+  max-width: 44rem;
+}
+
+@media (max-width: 640px) {
+  .channels {
+    grid-template-columns: 1fr;
+  }
+  .headline {
+    font-size: clamp(2.75rem, 15vw, 4.5rem);
+  }
+}
+
+.channel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-dark-line);
+}
+
+.channelLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--color-on-dark-faint);
+}
+
+.channelValue {
+  font-size: var(--fs-1);
+  color: var(--color-on-dark);
+  transition: color var(--dur-normal) var(--ease-out);
+}
+
+.channel:hover .channelValue {
+  color: var(--color-accent-bright);
+}
+
+.glow {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 46rem;
+  height: 46rem;
+  background: radial-gradient(circle, rgba(232, 184, 75, 0.14), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}

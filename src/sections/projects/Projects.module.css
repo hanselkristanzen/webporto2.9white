@@ -1,0 +1,279 @@
+.projects {
+  background: var(--color-paper);
+  padding-block: var(--space-10) var(--space-9);
+}
+
+.headerRow {
+  margin-bottom: var(--space-9);
+}
+
+.caseList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-9);
+}
+
+.case {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-6);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-paper-line-strong);
+}
+
+.caseInfo {
+  grid-column: 1 / span 5;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+@media (max-width: 960px) {
+  .case {
+    grid-template-columns: 1fr;
+  }
+  .caseInfo {
+    grid-column: auto;
+    order: 2;
+  }
+}
+
+.caseIndex {
+  font-family: var(--font-mono);
+  font-size: var(--fs-00);
+  color: var(--color-accent-text);
+}
+
+.caseTitle {
+  font-size: var(--fs-4);
+  padding-bottom: 0.08em;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.narrativeGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.narrativeBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.narrativeLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.narrativeValue {
+  font-size: var(--fs-1);
+  color: var(--color-ink-soft);
+  line-height: var(--lh-relaxed);
+  max-width: 42ch;
+}
+
+.techRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.tech {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  color: var(--color-ink-faint);
+}
+
+.tech:not(:last-child)::after {
+  content: "·";
+  margin-left: var(--space-2);
+  color: var(--color-paper-line-strong);
+}
+
+.ctaRow {
+  margin-top: var(--space-2);
+}
+
+.visualSlot {
+  grid-column: 6 / span 7;
+  position: relative;
+}
+
+@media (max-width: 960px) {
+  .visualSlot {
+    grid-column: auto;
+    order: 1;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* MULTIPLE VISUALS PER PROJECT                                       */
+/* A project with one visual (the common case, e.g. StairsLife) renders */
+/* it directly inside .visualSlot exactly as before. A project with     */
+/* several (e.g. MR.COFFEE's Figma + live-site previews) stacks them    */
+/* full-width in .visualGroup — roomier than a cramped side-by-side at  */
+/* .visualSlot's column width, and it's what "stack on mobile" already  */
+/* looks like, so no extra breakpoint logic is needed.                  */
+/* ---------------------------------------------------------------- */
+.visualGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.visualItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ---------------------------------------------------------------- */
+/* BROWSER-CHROME SCREENSHOT MOCKUP — TASK 7                          */
+/* ---------------------------------------------------------------- */
+.mockup {
+  display: block;
+  border-radius: var(--radius-2);
+  outline-offset: 4px;
+}
+
+.visualTilt {
+  position: relative;
+  border: 1px solid var(--color-paper-line-strong);
+  border-radius: var(--radius-2);
+  background: var(--color-paper-dim);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transform: perspective(1200px) rotateX(var(--ry, 0deg)) rotateY(var(--rx, 0deg));
+  transition: transform var(--dur-normal) var(--ease-out), box-shadow var(--dur-normal) var(--ease-out);
+}
+
+.mockup:hover .visualTilt,
+.mockup:focus-visible .visualTilt {
+  box-shadow: var(--shadow-lifted);
+}
+
+.mockupChrome {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-paper-line-strong);
+  background: var(--color-paper);
+}
+
+.mockupDots {
+  display: inline-flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.mockupDots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-paper-line-strong);
+  transition: background-color var(--dur-normal) var(--ease-out);
+}
+
+.mockup:hover .mockupDots span:nth-child(1) {
+  background: #e0644c;
+}
+.mockup:hover .mockupDots span:nth-child(2) {
+  background: var(--color-accent);
+}
+.mockup:hover .mockupDots span:nth-child(3) {
+  background: #4caf7d;
+}
+
+.mockupAddress {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wide);
+  color: var(--color-ink-faint);
+  background: var(--color-paper-dim);
+  border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-3);
+}
+
+.mockupScreen {
+  aspect-ratio: 16 / 9.5;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--color-paper-dim);
+}
+
+.mockupImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.mockup:hover .mockupImage,
+.mockup:focus-visible .mockupImage {
+  transform: scale(1.025);
+}
+
+.visualLabel {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+  z-index: 2;
+}
+
+.comingSoon {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-paper-line);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.comingSoonLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-00);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.comingSoonRule {
+  flex: 1;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-paper-line-strong) 0,
+    var(--color-paper-line-strong) 4px,
+    transparent 4px,
+    transparent 10px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visualTilt {
+    transform: none !important;
+  }
+}

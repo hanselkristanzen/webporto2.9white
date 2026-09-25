@@ -1,0 +1,67 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-loader);
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.wordWrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 4.5rem;
+}
+
+@media (min-width: 768px) {
+  .wordWrap {
+    height: 6rem;
+  }
+}
+
+.word {
+  grid-area: 1 / 1;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 5vw, 3rem);
+  letter-spacing: var(--ls-tight);
+  text-align: center;
+  padding-inline: var(--space-6);
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(18px) scale(0.98);
+}
+
+.counter {
+  position: absolute;
+  bottom: var(--space-7);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: var(--fs-00);
+  letter-spacing: var(--ls-wide);
+  color: var(--color-on-dark-faint);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.counterBar {
+  width: 6.5rem;
+  height: 1px;
+  background: var(--color-dark-line-strong);
+  position: relative;
+  overflow: hidden;
+}
+
+.counterFill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  background: var(--color-accent-bright);
+}

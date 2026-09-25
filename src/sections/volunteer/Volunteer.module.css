@@ -1,0 +1,97 @@
+.volunteer {
+  background: var(--color-paper);
+  padding-block: var(--space-8);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-5);
+  align-items: baseline;
+  padding-block: var(--space-6);
+  border-top: 1px solid var(--color-paper-line);
+  border-bottom: 1px solid var(--color-paper-line);
+}
+
+.label {
+  grid-column: 1 / span 2;
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.body {
+  grid-column: 3 / span 7;
+}
+
+@media (max-width: 720px) {
+  .label {
+    grid-column: 1 / span 12;
+  }
+  .body {
+    grid-column: 1 / span 12;
+    margin-top: var(--space-3);
+  }
+  .meta {
+    grid-column: 1 / span 12;
+    margin-top: var(--space-3);
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+}
+
+.role {
+  font-size: var(--fs-2);
+  color: var(--color-ink);
+}
+
+.description {
+  margin-top: var(--space-2);
+  font-size: var(--fs-1);
+  color: var(--color-ink-soft);
+  line-height: var(--lh-relaxed);
+  max-width: 52ch;
+}
+
+.meta {
+  grid-column: 10 / span 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--fs-00);
+  color: var(--color-ink-faint);
+}
+
+.photoTrigger {
+  display: inline-block;
+  border-radius: var(--radius-1);
+}
+
+.photoThumb {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: cover;
+  border-radius: var(--radius-1);
+  border: 1px solid var(--color-paper-line-strong);
+  filter: grayscale(1);
+  transition: filter var(--dur-normal) var(--ease-out), border-color var(--dur-normal) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.photoTrigger:hover .photoThumb,
+.photoTrigger:focus-visible .photoThumb {
+  filter: grayscale(0);
+  border-color: var(--color-ink);
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoThumb {
+    transform: none !important;
+  }
+}

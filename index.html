@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0c0b09" />
+
+    <title>i'm hansel kristanzen</title>
+    <meta
+      name="description"
+      content="Hansel Kristanzen is a computer science student and designer exploring technology, software engineering, and creative digital experiences."
+    />
+    <link rel="canonical" href="https://hanselkristanzen.dev/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Hansel Kristanzen — Computer Science Student & Designer" />
+    <meta
+      property="og:description"
+      content="Hansel Kristanzen is a computer science student and designer exploring technology, software engineering, and creative digital experiences."
+    />
+    <meta property="og:url" content="https://hanselkristanzen.dev/" />
+    <meta property="og:site_name" content="Hansel Kristanzen" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Hansel Kristanzen — Computer Science Student & Designer" />
+    <meta
+      name="twitter:description"
+      content="Hansel Kristanzen is a computer science student and designer exploring technology, software engineering, and creative digital experiences."
+    />
+
+    <!-- Fonts: General Sans (display/body) via Fontshare, Space Mono (technical labels) via Google Fonts -->
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--
+      Theme bootstrap — runs before React mounts (and before first paint in
+      practice) so the correct `data-theme` attribute is already present when
+      CSS custom properties are resolved. Without this, a client-rendered
+      theme toggle would cause a flash of the default theme on every load.
+    -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('hk-theme');
+          var theme =
+            stored === 'light' || stored === 'dark'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

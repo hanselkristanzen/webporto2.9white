@@ -1,0 +1,249 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  overflow: hidden;
+}
+
+.canvasLayer {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-canvas);
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: calc(var(--z-canvas) + 1);
+  background:
+    radial-gradient(ellipse at 68% 42%, transparent 0%, rgba(12, 11, 9, 0.25) 55%, rgba(12, 11, 9, 0.92) 100%);
+  pointer-events: none;
+}
+
+/*
+  `.grid` sits above the hero backdrop (`.canvasLayer`). It used to have no
+  pointer-events rule, which meant its own box — not just its visible
+  children — captured every pointer event across nearly the whole hero (an
+  element's hit-testing area is its layout box, painted background or not),
+  so none of them could reach the layer underneath (which owns the
+  easter-egg click handler, and is what a touch lands on). Setting
+  `pointer-events: none` here lets the pointer pass through the empty space
+  between headline/buttons/text. The headline itself doesn't need to opt back
+  in to `auto` — VariableProximity tracks the cursor via a page-level
+  listener rather than local hit-testing, so it keeps working correctly
+  here. Only the buttons (which need real clicks/magnetic pointer tracking)
+  opt back in below.
+*/
+.grid {
+  position: relative;
+  z-index: var(--z-content);
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-5);
+  padding-block: clamp(5.5rem, 8vh, var(--space-9)) clamp(2.5rem, 6vh, var(--space-8));
+  transform: translateY(calc(var(--scroll-progress, 0) * -28px));
+  pointer-events: none;
+}
+
+.meta {
+  grid-column: 1 / span 12;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-7);
+}
+
+.metaLeft,
+.metaRight {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--color-on-dark-faint);
+}
+
+.metaRight {
+  text-align: right;
+}
+
+.headlineBlock {
+  grid-column: 1 / span 9;
+}
+
+@media (max-width: 900px) {
+  .headlineBlock {
+    grid-column: 1 / span 12;
+  }
+}
+
+.headline {
+  font-size: var(--fs-6);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.headlineLine {
+  display: block;
+  overflow: hidden;
+  /* Descender-safety trick: the reveal mask needs overflow:hidden to clip
+     the yPercent slide, but clipping *exactly* to the line box crops
+     descenders (g, y, j, p) on some font builds. Padding the box and
+     pulling it back up with a matching negative margin keeps the mask
+     effect intact while giving descenders room to breathe. */
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.supportRow {
+  grid-column: 1 / span 12;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-5);
+  margin-top: var(--space-7);
+  align-items: end;
+}
+
+.role {
+  grid-column: 1 / span 5;
+  font-size: var(--fs-2);
+  color: var(--color-on-dark);
+  font-weight: 400;
+}
+
+@media (max-width: 900px) {
+  .role {
+    grid-column: 1 / span 12;
+  }
+}
+
+.statement {
+  grid-column: 7 / span 5;
+  font-size: var(--fs-1);
+  color: var(--color-on-dark-soft);
+  line-height: var(--lh-relaxed);
+  max-width: 32ch;
+  justify-self: end;
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .statement {
+    grid-column: 1 / span 12;
+    justify-self: start;
+    margin-top: var(--space-4);
+  }
+}
+
+.ctaRow {
+  grid-column: 1 / span 12;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  margin-top: var(--space-9);
+  pointer-events: auto;
+}
+
+/*
+  SCROLL HINT — TASK 11: this used to be `position: absolute; bottom: ...`,
+  floating independently of the CTA row above it. On short mobile viewports
+  that meant it could sit directly on top of "Get In Touch". It now lives in
+  normal grid flow, after the CTA row, so its position is always derived
+  from the actual height of the content above it instead of a fixed offset.
+*/
+.scrollHint {
+  grid-column: 1 / span 12;
+  margin-top: clamp(var(--space-6), 8vh, var(--space-9));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-on-dark-faint);
+}
+
+.scrollHintArrow {
+  animation: bob 2.2s var(--ease-in-out) infinite;
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollHintArrow {
+    animation: none;
+  }
+  .grid {
+    transform: none;
+  }
+}
+
+.easterEgg {
+  position: absolute;
+  bottom: var(--space-6);
+  right: var(--gutter);
+  z-index: var(--z-easter-egg);
+  font-family: var(--font-mono);
+  font-size: var(--fs-00);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-accent-bright);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--dur-slow) var(--ease-out), transform var(--dur-slow) var(--ease-out);
+  pointer-events: none;
+}
+
+.easterEgg[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  .grid {
+    padding-block: clamp(5rem, 10vh, 6rem) var(--space-7);
+  }
+
+  .headline {
+    font-size: clamp(2.75rem, 15vw, 4.5rem);
+    line-height: 1.02;
+  }
+
+  .ctaRow {
+    margin-top: var(--space-7);
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .ctaRow > span {
+    width: 100%;
+  }
+
+  .ctaRow > span > a,
+  .ctaRow > span > button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .scrollHint {
+    margin-top: var(--space-7);
+  }
+}

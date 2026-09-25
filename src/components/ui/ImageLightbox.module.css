@@ -1,0 +1,107 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-lightbox);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background: rgba(12, 11, 9, 0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out),
+    backdrop-filter 0.35s var(--ease-out),
+    visibility 0s linear 0.35s;
+}
+
+.overlay[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  background: rgba(12, 11, 9, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition:
+    opacity 0.35s var(--ease-out),
+    background-color 0.35s var(--ease-out),
+    backdrop-filter 0.35s var(--ease-out),
+    visibility 0s linear 0s;
+}
+
+/* The image itself is never blurred/darkened — only the backdrop is.
+   transform-origin defaults to center, but callers that pass the click
+   position via --lightbox-origin-x/y get a "grows from where you clicked"
+   feel instead of a flat center pop. */
+.image {
+  position: relative;
+  max-width: min(92vw, 1100px);
+  max-height: min(86vh, 900px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-lifted);
+  opacity: 0;
+  transform: scale(0.35);
+  transform-origin: var(--lightbox-origin-x, 50%) var(--lightbox-origin-y, 50%);
+  transition: opacity 0.4s var(--ease-out), transform 0.45s var(--ease-signal);
+}
+
+.overlay[data-open="true"] .image {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.close {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--gutter);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-00);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-on-dark);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-dark-line-strong);
+  border-radius: var(--radius-pill);
+  background: rgba(12, 11, 9, 0.4);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.3s var(--ease-out) 0.1s, transform 0.3s var(--ease-out) 0.1s, border-color 0.2s var(--ease-out);
+}
+
+.overlay[data-open="true"] .close {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.close:hover,
+.close:focus-visible {
+  border-color: var(--color-accent-bright);
+  color: var(--color-accent-bright);
+}
+
+@media (max-width: 640px) {
+  .overlay {
+    padding: var(--space-4);
+  }
+
+  .close {
+    top: var(--space-4);
+    right: var(--space-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .image,
+  .close {
+    transition-duration: 0.001ms !important;
+  }
+}

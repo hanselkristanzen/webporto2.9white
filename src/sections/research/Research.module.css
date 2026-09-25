@@ -1,0 +1,373 @@
+.research {
+  background: var(--color-dark);
+  color: var(--color-on-dark);
+  padding-block: var(--space-10) var(--space-9);
+}
+
+.headerRow {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.headerLeft {
+  grid-column: 1 / span 7;
+}
+
+.authors {
+  margin-top: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-00);
+  color: var(--color-on-dark-faint);
+  max-width: 46ch;
+  line-height: var(--lh-relaxed);
+}
+
+.authorMe {
+  color: var(--color-accent-bright);
+}
+
+.headerRight {
+  grid-column: 9 / span 4;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  justify-self: end;
+  padding: var(--space-5);
+  border: 1px solid var(--color-dark-line);
+  border-radius: var(--radius-2);
+}
+
+@media (max-width: 960px) {
+  .headerLeft,
+  .headerRight {
+    grid-column: 1 / span 12;
+    justify-self: start;
+  }
+}
+
+.paperTitle {
+  font-size: var(--fs-1);
+  color: var(--color-on-dark);
+  line-height: var(--lh-snug);
+}
+
+.datasetLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--color-on-dark-faint);
+}
+
+.datasetStats {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.datasetStat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.datasetStatValue {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3);
+  color: var(--color-accent-bright);
+}
+
+.datasetStatLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-on-dark-faint);
+}
+
+.characteristics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* ---------------------------------------------------------------- */
+/* MODEL COMPARISON WIDGET                                            */
+/* ---------------------------------------------------------------- */
+.comparison {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--space-7);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modelList {
+  display: flex;
+  flex-direction: column;
+}
+
+.modelRow {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--color-dark-line);
+  transition: opacity var(--dur-normal) var(--ease-out);
+}
+
+.modelList > *:last-child {
+  border-bottom: 1px solid var(--color-dark-line);
+}
+
+.modelRowTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-2);
+}
+
+.modelName {
+  font-size: var(--fs-1);
+  color: var(--color-on-dark);
+}
+
+.modelRow[data-active="true"] .modelName {
+  color: var(--color-accent-bright);
+}
+
+.modelValue {
+  font-family: var(--font-mono);
+  font-size: var(--fs-1);
+  color: var(--color-on-dark-soft);
+}
+
+.modelRow[data-active="true"] .modelValue {
+  color: var(--color-accent-bright);
+}
+
+.barTrack {
+  height: 3px;
+  background: var(--color-dark-line);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  background: var(--color-on-dark-faint);
+  border-radius: var(--radius-pill);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1s var(--ease-signal), background-color var(--dur-normal) var(--ease-out);
+}
+
+.modelRow[data-active="true"] .barFill {
+  background: var(--color-accent-bright);
+}
+
+.modelRow[data-has-data="false"] .barFill {
+  display: none;
+}
+
+.notReported {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-on-dark-faint);
+}
+
+/* ---------------------------------------------------------------- */
+/* DETAIL PANEL                                                       */
+/* ---------------------------------------------------------------- */
+.detailPanel {
+  border: 1px solid var(--color-dark-line);
+  border-radius: var(--radius-2);
+  padding: var(--space-6);
+  min-height: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.detailName {
+  font-size: var(--fs-3);
+  color: var(--color-accent-bright);
+}
+
+.detailMethod {
+  font-size: var(--fs-1);
+  color: var(--color-on-dark-soft);
+  line-height: var(--lh-relaxed);
+}
+
+.detailMetrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-5);
+  margin-top: auto;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-dark-line);
+}
+
+.detailMetric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.detailMetricValue {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2);
+  color: var(--color-on-dark);
+}
+
+.detailMetricLabel {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-on-dark-faint);
+}
+
+.detailNote {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  color: var(--color-on-dark-faint);
+  line-height: var(--lh-relaxed);
+}
+
+/* ---------------------------------------------------------------- */
+/* INSIGHT CALLOUTS                                                   */
+/* ---------------------------------------------------------------- */
+.insights {
+  margin-top: var(--space-8);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+@media (max-width: 900px) {
+  .insights {
+    grid-template-columns: 1fr;
+  }
+}
+
+.insight {
+  padding: var(--space-5);
+  border: 1px solid var(--color-dark-line);
+  border-radius: var(--radius-2);
+}
+
+.insightValue {
+  font-family: var(--font-mono);
+  font-size: var(--fs-3);
+  color: var(--color-accent-bright);
+}
+
+.insightLabel {
+  margin-top: var(--space-2);
+  font-size: var(--fs-0);
+  color: var(--color-on-dark-soft);
+  line-height: var(--lh-normal);
+}
+
+.insightMeta {
+  margin-top: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  color: var(--color-on-dark-faint);
+}
+
+/* ---------------------------------------------------------------- */
+/* LIMITATION CALLOUT — TASK 20 (synthetic-benchmark caveat)          */
+/* ---------------------------------------------------------------- */
+.limitation {
+  margin-top: var(--space-7);
+  padding: var(--space-5) var(--space-6);
+  border-left: 2px solid var(--color-accent-bright);
+  background: rgba(232, 184, 75, 0.06);
+  font-size: var(--fs-0);
+  line-height: var(--lh-relaxed);
+  color: var(--color-on-dark-soft);
+  max-width: 68ch;
+}
+
+.limitationLabel {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--color-accent-bright);
+}
+
+/* ---------------------------------------------------------------- */
+/* CONFERENCE CERTIFICATE                                             */
+/* A framed, clickable image (opens the shared ImageLightbox) rather  */
+/* than a bespoke viewer — the same interaction already used for      */
+/* Experience/Volunteer photos.                                       */
+/* ---------------------------------------------------------------- */
+.certificateBlock {
+  margin-top: var(--space-8);
+  padding-top: var(--space-7);
+  border-top: 1px solid var(--color-dark-line);
+}
+
+.certificateEyebrow {
+  display: block;
+  margin-bottom: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--color-on-dark-faint);
+}
+
+.certificateFrame {
+  display: block;
+  width: 100%;
+  max-width: 42rem;
+  padding: var(--space-3);
+  background: var(--color-paper);
+  border: 1px solid var(--color-dark-line-strong);
+  border-radius: var(--radius-2);
+  box-shadow: var(--shadow-soft);
+  transition: border-color var(--dur-normal) var(--ease-out), transform var(--dur-normal) var(--ease-out);
+}
+
+.certificateFrame:hover,
+.certificateFrame:focus-visible {
+  border-color: var(--color-accent-bright);
+  transform: translateY(-2px);
+}
+
+.certificateImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-1);
+}
+
+.certificateCaption {
+  margin-top: var(--space-3);
+  font-size: var(--fs-000);
+  font-family: var(--font-mono);
+  color: var(--color-on-dark-faint);
+  max-width: 42rem;
+  line-height: var(--lh-relaxed);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .certificateFrame {
+    transform: none !important;
+  }
+}

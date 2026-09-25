@@ -1,0 +1,71 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-paper-line-strong);
+  border-radius: var(--radius-pill);
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+  transition:
+    border-color var(--dur-normal) var(--ease-out),
+    color var(--dur-normal) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-normal) var(--ease-out);
+}
+
+.tag:hover {
+  border-color: var(--color-ink);
+  color: var(--color-ink);
+  transform: translateY(-1px);
+}
+
+.tag[data-tone="accent"] {
+  border-color: var(--color-accent);
+  color: var(--color-accent-text);
+}
+
+.tag[data-tone="accent"]:hover {
+  border-color: var(--color-accent-text);
+  background: var(--color-accent-dim);
+  transform: translateY(-1px) scale(1.03);
+}
+
+.arrow {
+  transition: transform var(--dur-normal) var(--ease-out);
+}
+
+.tag[data-tone="accent"]:hover .arrow {
+  transform: translateX(3px);
+}
+
+section[data-dark] .tag {
+  border-color: var(--color-dark-line-strong);
+  color: var(--color-on-dark-soft);
+}
+
+section[data-dark] .tag:hover {
+  border-color: var(--color-on-dark);
+  color: var(--color-on-dark);
+}
+
+section[data-dark] .tag[data-tone="accent"] {
+  border-color: var(--color-accent-bright);
+  color: var(--color-accent-bright);
+}
+
+section[data-dark] .tag[data-tone="accent"]:hover {
+  border-color: var(--color-accent-bright);
+  background: rgba(232, 184, 75, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tag,
+  .tag:hover {
+    transform: none;
+  }
+}

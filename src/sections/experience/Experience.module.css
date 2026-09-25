@@ -1,0 +1,168 @@
+.experience {
+  background: var(--color-paper);
+  padding-block: var(--space-10) var(--space-9);
+}
+
+.headerRow {
+  margin-bottom: var(--space-8);
+}
+
+.timeline {
+  position: relative;
+  padding-left: var(--space-7);
+}
+
+.lineTrack {
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 0;
+  width: 1px;
+  background: var(--color-paper-line);
+}
+
+.lineFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--color-accent-text);
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+/*
+  TASK 13 root cause: the date column was a fixed `8rem` with
+  `white-space: nowrap` on `.date`. "Mar 2026 — Apr 2026" at this font
+  doesn't fit in 8rem, and CSS Grid does not clip nowrap text that
+  overflows a track — it just paints over the neighbouring column, which is
+  exactly the collision in the reference screenshot. `clamp()` gives the
+  column enough room at every viewport instead of a single magic number.
+*/
+.item {
+  position: relative;
+  padding-block: var(--space-6);
+  border-bottom: 1px solid var(--color-paper-line);
+  display: grid;
+  grid-template-columns: clamp(9.5rem, 3rem + 14vw, 12.5rem) 1fr auto;
+  gap: var(--space-5);
+  align-items: baseline;
+  transition: opacity var(--dur-normal) var(--ease-out);
+}
+
+.item:first-child {
+  padding-top: 0;
+}
+
+.item:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 1024px) and (min-width: 721px) {
+  .item {
+    grid-template-columns: clamp(8.5rem, 2rem + 12vw, 10.5rem) 1fr auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .item {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+  }
+}
+
+.dot {
+  position: absolute;
+  left: calc(var(--space-7) * -1 - 4.5px);
+  top: calc(var(--space-6) + 0.4rem);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--color-paper);
+  border: 1px solid var(--color-paper-line-strong);
+  transition: background-color var(--dur-normal) var(--ease-out), border-color var(--dur-normal) var(--ease-out);
+}
+
+.item[data-visible="true"] .dot {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.date {
+  font-family: var(--font-mono);
+  font-size: var(--fs-00);
+  letter-spacing: var(--ls-wide);
+  color: var(--color-ink-faint);
+  white-space: nowrap;
+}
+
+.role {
+  font-size: var(--fs-2);
+  color: var(--color-ink);
+  padding-bottom: 0.08em;
+}
+
+.org {
+  margin-top: var(--space-1);
+  font-size: var(--fs-1);
+  color: var(--color-ink-soft);
+}
+
+.location {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  .location {
+    align-items: flex-start;
+    text-align: left;
+    margin-top: var(--space-2);
+  }
+}
+
+.locationText {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wide);
+  color: var(--color-ink-faint);
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------- */
+/* PHOTO LIGHTBOX TRIGGER — TASK 6                                    */
+/* A small always-visible thumbnail; clicking it opens the shared     */
+/* ImageLightbox (see components/ui/ImageLightbox.tsx).               */
+/* ---------------------------------------------------------------- */
+.photoTrigger {
+  display: inline-block;
+  border-radius: var(--radius-1);
+}
+
+.photoThumb {
+  width: 2.5rem;
+  height: 2.5rem;
+  object-fit: cover;
+  border-radius: var(--radius-1);
+  border: 1px solid var(--color-paper-line-strong);
+  filter: grayscale(1);
+  transition: filter var(--dur-normal) var(--ease-out), border-color var(--dur-normal) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.photoTrigger:hover .photoThumb,
+.photoTrigger:focus-visible .photoThumb {
+  filter: grayscale(0);
+  border-color: var(--color-ink);
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photoThumb {
+    transform: none !important;
+  }
+}

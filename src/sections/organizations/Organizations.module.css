@@ -1,0 +1,67 @@
+.organizations {
+  background: var(--color-paper-dim);
+  padding-block: var(--space-9);
+}
+
+.headerRow {
+  margin-bottom: var(--space-7);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-7);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
+
+.org {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.orgName {
+  font-size: var(--fs-2);
+  color: var(--color-ink);
+}
+
+.orgFullName {
+  margin-top: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.roleList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.role {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-paper-line);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.roleTitle {
+  font-size: var(--fs-0);
+  color: var(--color-ink-soft);
+  line-height: var(--lh-normal);
+}
+
+.roleDate {
+  font-family: var(--font-mono);
+  font-size: var(--fs-000);
+  color: var(--color-ink-faint);
+}
